@@ -33,19 +33,22 @@ function HomePage() {
         justifyContent: 'center',
         alignItems: 'center',
         padding: '20px',
+        boxSizing: 'border-box',
       }}
     >
       {/* ЛИСТ */}
       <div
-        style={{
-          width: '800px',
-          height: '1200px',
-          backgroundImage: `url(${bg})`,
-          backgroundSize: 'cover',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
+  style={{
+    width: 'min(calc(100vw - 40px), calc((100vh - 40px) * 2 / 3))',
+    aspectRatio: '2 / 3',
+    backgroundImage: `url(${bg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    position: 'relative',
+    overflow: 'hidden',
+  }}
+>
         {/* СКРОЛЛ ВНУТРИ ЛИСТА */}
         <div
           style={{
@@ -53,6 +56,7 @@ function HomePage() {
             inset: 0,
             overflowY: 'auto',
             padding: '40px',
+            boxSizing: 'border-box',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
