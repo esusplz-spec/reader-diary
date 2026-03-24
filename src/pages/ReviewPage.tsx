@@ -239,8 +239,6 @@ export default function ReviewPage() {
     return serializeState(details, similarBooks)
   }, [details, similarBooks])
 
-  const isDirty = currentSnapshot !== savedSnapshot
-
   const handleBack = () => {
     if (isEdit) {
       setShowLeavePopup(true)
