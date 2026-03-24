@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { createReview, deleteReview, getReviews, type Review } from '../data/storage'
 import bg from '../assets/page1.png'
 
+
 function HomePage() {
   const [reviews, setReviews] = useState<Review[]>([])
   const [deleteId, setDeleteId] = useState<string | null>(null)
@@ -60,8 +61,8 @@ return (
         >
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <button
-            onClick={handleAddReview}
-            style={{
+              onClick={handleAddReview}
+              style={{
               background: 'rgba(94, 34, 34, 0.62)',
               marginLeft: 'auto',
               marginBlockEnd: '40px',
