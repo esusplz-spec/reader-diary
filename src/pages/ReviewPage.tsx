@@ -87,14 +87,6 @@ function sanitizeForSave(
   }
 }
 
-function serializeState(details: ReviewDetails, similarBooks: SimilarBook[]) {
-  return JSON.stringify(
-    sanitizeForSave(details, similarBooks).similarBooks.length >= 0
-      ? sanitizeForSave(details, similarBooks)
-      : details
-  )
-}
-
 function StarRating({
   label,
   value,
@@ -165,7 +157,6 @@ export default function ReviewPage() {
 
   const [details, setDetails] = useState<ReviewDetails>(EMPTY_DETAILS)
   const [similarBooks, setSimilarBooks] = useState<SimilarBook[]>([])
-  const [savedSnapshot, setSavedSnapshot] = useState('')
   const [hasSavedDetail, setHasSavedDetail] = useState(false)
 
   useEffect(() => {
@@ -197,12 +188,7 @@ export default function ReviewPage() {
         )
         setIsEdit(false)
         setHasSavedDetail(true)
-        setSavedSnapshot(
-          JSON.stringify({
-            ...stored,
-            similarBooks: stored.similarBooks || [],
-          })
-        )
+        
         return
       } catch {
         // ignore parse error and treat as new
@@ -216,13 +202,7 @@ export default function ReviewPage() {
     setSimilarBooks([])
     setIsEdit(true)
     setHasSavedDetail(false)
-    setSavedSnapshot(
-      JSON.stringify({
-        ...EMPTY_DETAILS,
-        title: summary.title === 'Новый отзыв' ? '' : summary.title,
-        similarBooks: [],
-      })
-    )
+    
   }, [id, navigate])
 
   const averageRating = useMemo(() => {
@@ -234,10 +214,6 @@ export default function ReviewPage() {
 
     return avg.toFixed(1)
   }, [details.ratings])
-
-  const currentSnapshot = useMemo(() => {
-    return serializeState(details, similarBooks)
-  }, [details, similarBooks])
 
   const handleBack = () => {
     if (isEdit) {
@@ -442,7 +418,6 @@ export default function ReviewPage() {
     setTitleError(false)
     setIsEdit(false)
     setHasSavedDetail(true)
-    setSavedSnapshot(JSON.stringify(finalDetails))
   }
 
   const selectedGenreOptions = GENRE_OPTIONS.filter(
